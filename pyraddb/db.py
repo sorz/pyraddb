@@ -5,7 +5,7 @@ _conn = None
 
 def connect_mysql(**kwargs):
     """Sets database connection parameters for the whole pragram.
-    Should be called at first.
+    The connection will keep open.
 
     See all arguments on http://dev.mysql.com/doc/connector-python/en/
                          connector-python-connectargs.html
@@ -15,6 +15,12 @@ def connect_mysql(**kwargs):
         _conn.close()
         _conn = None
     _conn = mysql.connector.connect(**kwargs)
+
+
+def set_mysql_connection(connection):
+    """Use a already exist connection."""
+    global _conn
+    _conn = connection
 
 
 def cursor():
